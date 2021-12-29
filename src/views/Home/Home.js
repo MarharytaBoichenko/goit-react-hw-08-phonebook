@@ -1,9 +1,12 @@
-import { Navigation } from '../../components/Navigation/Navigation';
+import { Header } from '../Header/Header';
+
 export const Home = () => {
   return (
     <>
-      <div>Hello, I`m your phonebook</div>
-      <Navigation />
+      <Header />
+      <main>
+        <h2>Hello, I`m your phonebook</h2>
+      </main>
     </>
   );
 };

@@ -3,13 +3,14 @@ import { ContactList } from '../../components/ContactList/ContactList';
 import { Filter } from '../../components/Filter/Filter';
 import { Heading } from '../../components/Heading/Heading';
 import { Container } from '../../components/Container/Container';
-import { UserMenu } from '../../components/UserMenu/userMenu';
+// import { UserMenu } from '../../components/User Menu/userMenu';
+import { Header } from '../Header/Header';
 
 export const Contacts = () => {
   return (
     <>
       <Container>
-        <UserMenu />
+        <Header />
         <Heading text="Phonebook" />
         <ContactForm />
         <Heading text="Contacts" />

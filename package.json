@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.6",
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -22,11 +25,12 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "netlify": "netlify",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build",
+    "deploy": "netlify deploy -p",
     "predeploy": "npm run build",
     "prepare": "husky install"
   },
@@ -38,7 +42,6 @@
   "bugs": {
     "url": "https://github.com/MarharytaBoichenko/goit-react-hw-08-phonebook/issues"
   },
-  "homepage": "https://MarharytaBoichenko.github.io/goit-react-hw-08-phonebook",
   "eslintConfig": {
     "extends": [
       "react-app",

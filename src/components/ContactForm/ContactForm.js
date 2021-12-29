@@ -1,43 +1,60 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addContacts } from "../../redux/operations";
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContacts, replaceContacts } from '../../redux/operations';
 
-import s from "./ContactForm.module.css";
+import s from './ContactForm.module.css';
 
 function ContactForm() {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  const contacts = useSelector((state) => {
+  const contacts = useSelector(state => {
     return state.contacts;
   });
   const dispatch = useDispatch();
 
-  const nameHandler = (e) => {
+  const nameHandler = e => {
     setName(e.target.value);
   };
-  const numberHandler = (e) => {
+  const numberHandler = e => {
     setNumber(e.target.value);
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = e => {
     e.preventDefault();
     const nameInContact = name.toLowerCase().trim();
     const isInContact = contacts.find(
-      (cont) => cont.name.toLowerCase().trim() === nameInContact
+      cont => cont.name.toLowerCase().trim() === nameInContact,
     );
+
+    ////наверно  костыли))
+
+    const idInContacts = contacts
+      .filter(cont => cont.name.toLowerCase().trim() === nameInContact)
+      .map(cont => cont.id);
+    console.log(idInContacts[0]);
+    const id = idInContacts[0];
+
     if (isInContact) {
-      alert(`${name} is already in contact`);
+      const needToReplace = window.confirm(
+        `${name} is already in contact,  do  you want to  replace ?`,
+      );
+      if (needToReplace) {
+        console.log('patch');
+        dispatch(replaceContacts({ id, name, number }));
+        reset();
+      }
       return;
     }
+    console.log('add');
     dispatch(addContacts({ name, number }));
     reset();
   };
 
   const reset = () => {
-    setName("");
-    setNumber("");
+    setName('');
+    setNumber('');
   };
 
   return (
