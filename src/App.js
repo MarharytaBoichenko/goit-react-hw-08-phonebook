@@ -16,6 +16,7 @@ import { getRefreshing } from './redux/auth/auth-selectors';
 export default function App() {
   const dispatch = useDispatch();
   const refreshing = useSelector(getRefreshing);
+  console.log(refreshing);
 
   ////при загрузке  приложения  запрашиваем  текущего пользователя
   useEffect(() => {
@@ -23,47 +24,47 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <div>Hello world1</div>
+    // <div>Hello world1</div>
     ///для  предотвращения  мигания страниц при перезагрузке страницы  -  пока загрузка  не рендерится,  когд получены данные польз  тогда рендер
 
-    // !refreshing && (
-    //   <Routes>
-    //     {/* <Route index element={<HomePage />} /> */}
-    //     <Route
-    //       path="/"
-    //       element={
-    //         <PublicRoute>
-    //           <Home />
-    //         </PublicRoute>
-    //       }
-    //     />
-    //     <Route
-    //       path="register"
-    //       element={
-    //         <PublicRoute restricted>
-    //           <Register />
-    //         </PublicRoute>
-    //       }
-    //     />
+    !refreshing && (
+      <Routes>
+        {/* <Route index element={<HomePage />} /> */}
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <Home />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="register"
+          element={
+            <PublicRoute restricted>
+              <Register />
+            </PublicRoute>
+          }
+        />
 
-    //     <Route
-    //       path="login"
-    //       element={
-    //         <PublicRoute restricted redirectTo="/contacts">
-    //           <Login />
-    //         </PublicRoute>
-    //       }
-    //     />
+        <Route
+          path="login"
+          element={
+            <PublicRoute restricted redirectTo="/contacts">
+              <Login />
+            </PublicRoute>
+          }
+        />
 
-    //     <Route
-    //       path="contacts"
-    //       element={
-    //         <PrivateRoute redirectTo="/login">
-    //           <Contacts />
-    //         </PrivateRoute>
-    //       }
-    //     />
-    //   </Routes>
-    // )
+        <Route
+          path="contacts"
+          element={
+            <PrivateRoute redirectTo="/login">
+              <Contacts />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    )
   );
 }

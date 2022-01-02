@@ -39,4 +39,7 @@ export const userReducer = createReducer(initialState, {
     state.isLoggedIn = true;
     state.isRefreshing = false;
   },
+  [operations.fetchCurrentUser.rejected]: (state, action) => {
+    state.isRefreshing = false;
+  },
 });
