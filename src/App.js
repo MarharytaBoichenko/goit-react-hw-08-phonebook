@@ -26,43 +26,44 @@ export default function App() {
     ///для  предотвращения  мигания страниц при перезагрузке страницы  -  пока загрузка  не рендерится,  когд получены данные польз  тогда рендер
 
     !refreshing && (
-      <Routes>
-        {/* <Route index element={<HomePage />} /> */}
-        <Route
-          path="/"
-          element={
-            <PublicRoute>
-              <Home />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <PublicRoute restricted>
-              <Register />
-            </PublicRoute>
-          }
-        />
+      <div>Hello world1</div>
+      // <Routes>
+      //   {/* <Route index element={<HomePage />} /> */}
+      //   <Route
+      //     path="/"
+      //     element={
+      //       <PublicRoute>
+      //         <Home />
+      //       </PublicRoute>
+      //     }
+      //   />
+      //   <Route
+      //     path="register"
+      //     element={
+      //       <PublicRoute restricted>
+      //         <Register />
+      //       </PublicRoute>
+      //     }
+      //   />
 
-        <Route
-          path="login"
-          element={
-            <PublicRoute restricted redirectTo="/contacts">
-              <Login />
-            </PublicRoute>
-          }
-        />
+      //   <Route
+      //     path="login"
+      //     element={
+      //       <PublicRoute restricted redirectTo="/contacts">
+      //         <Login />
+      //       </PublicRoute>
+      //     }
+      //   />
 
-        <Route
-          path="contacts"
-          element={
-            <PrivateRoute redirectTo="/login">
-              <Contacts />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+      //   <Route
+      //     path="contacts"
+      //     element={
+      //       <PrivateRoute redirectTo="/login">
+      //         <Contacts />
+      //       </PrivateRoute>
+      //     }
+      //   />
+      // </Routes>
     )
   );
 }
