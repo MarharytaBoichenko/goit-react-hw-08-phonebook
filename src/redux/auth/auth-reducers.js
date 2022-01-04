@@ -16,6 +16,9 @@ export const userReducer = createReducer(initialState, {
     state.token = action.payload.token;
     state.isLoggedIn = true;
   },
+  // [operations.register.rejected]: (state, action) => {
+
+  // }
   [operations.logIn.fulfilled]: (state, action) => {
     console.log(action.payload);
     state.user = action.payload.user;

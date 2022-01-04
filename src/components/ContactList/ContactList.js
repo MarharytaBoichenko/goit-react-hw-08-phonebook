@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { List } from '@mui/material';
 import { ContactItem } from '../ContactItem/ContactItem';
-import s from './ContactList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getVisibleContacts } from '../../redux/selectors';
 import { fetchContacts } from '../../redux/operations';
@@ -16,15 +16,11 @@ const ContactList = () => {
   const visibleContacts = useSelector(getVisibleContacts);
 
   return (
-    <ul className={s.list}>
+    <List sx={{ width: '350px' }}>
       {visibleContacts.map(({ id, name, number }) => {
-        return (
-          <li key={id} className={s.item}>
-            <ContactItem name={name} number={number} id={id} />
-          </li>
-        );
+        return <ContactItem key={id} name={name} number={number} id={id} />;
       })}
-    </ul>
+    </List>
   );
 };
 ContactList.propTypes = {

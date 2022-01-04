@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { TextField, Button, Container, Typography } from '@mui/material';
+import s from './Register.module.css';
 import operations from '../../redux/auth/auth-operations';
-import { Header } from '../Header/Header';
+import { Header } from '../../components/Header/Header';
 
 export const Register = () => {
   const [name, setName] = useState('');
@@ -37,36 +39,65 @@ export const Register = () => {
   return (
     <>
       <Header />
-      <form onSubmit={onRegisterHandler}>
-        <label>
-          <input
+      <Container
+        maxWidth="sm"
+        sx={{
+          padding: '30px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="h4" component="p" fontWeight="500">
+          Sign up to begin
+        </Typography>
+
+        <form onSubmit={onRegisterHandler} className={s.form}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            required
             type="name"
             value={name}
             placeholder="Enter  your name"
             onChange={onNameChange}
-          ></input>
-        </label>
-        <label>
-          <input
+            size="small"
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            required
             type="email"
             value={email}
             placeholder="Enter  your email"
             onChange={onEmailChange}
-          ></input>
-        </label>
-        <label>
-          <input
+            size="small"
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            required
             type="text"
             value={password}
             placeholder="Enter  your password"
             onChange={onPasswordChange}
-            // pattern="/^[a-z0-9]+/"
-            title="Пароль должен состоять из цифр и латинских букв верхнего и нижнего регистра"
-          ></input>
-        </label>
-        <button type="submit">Register</button>
-        <button type="submit">Login with Google</button>
-      </form>
+            size="small"
+            margin="normal"
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            size="small"
+            sx={{ width: 130 }}
+          >
+            Register
+          </Button>
+          {/* <button type="submit">Login with Google</button> */}
+        </form>
+      </Container>
     </>
   );
 };

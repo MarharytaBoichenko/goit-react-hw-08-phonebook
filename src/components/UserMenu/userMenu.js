@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { Button, Typography, Box } from '@mui/material';
 import { getName } from '../../redux/auth/auth-selectors';
 import operations from '../../redux/auth/auth-operations';
 
@@ -10,11 +11,17 @@ export const UserMenu = () => {
     dispatch(operations.logOut());
   };
   return (
-    <section>
-      <p>Welcome, {name}</p>
-      <button type="button" onClick={logOutHandler}>
+    <Box component="section" sx={{ display: 'flex', alignItems: 'center' }}>
+      <Typography sx={{ mr: '10px' }}>Welcome, {name}</Typography>
+      <Button
+        type="button"
+        onClick={logOutHandler}
+        variant="contained"
+        size="small"
+        sx={{ width: 100, backgroundColor: 'white', color: '#1976d2' }}
+      >
         LogOut
-      </button>
-    </section>
+      </Button>
+    </Box>
   );
 };

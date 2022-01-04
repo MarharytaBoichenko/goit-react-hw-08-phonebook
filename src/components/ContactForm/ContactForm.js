@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { TextField, Button, Typography } from '@mui/material';
 import { addContacts, replaceContacts } from '../../redux/operations';
 
 import s from './ContactForm.module.css';
@@ -59,33 +60,43 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleOnSubmit} className={s.form}>
-      <label className={s.inputLabel}>
-        <span className={s.label}> Name</span>
-        <input
-          onChange={nameHandler}
-          type="name"
-          // name="name"
-          value={name}
-          className={s.nameInput}
-          required
-        ></input>
-      </label>
-      <label className={s.inputLabel}>
-        <span className={s.label}> Number</span>
-        <input
-          type="tel"
-          // name="number"
-          value={number}
-          onChange={numberHandler}
-          className={s.nameInput}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-          required
-        />
-      </label>
-      <button type="submit" className={s.button}>
+      <Typography> Name</Typography>
+      <TextField
+        fullWidth
+        autoComplete="off"
+        variant="outlined"
+        required
+        type="name"
+        value={name}
+        onChange={nameHandler}
+        size="small"
+        margin="normal"
+      />
+
+      <Typography> Number</Typography>
+      <TextField
+        fullWidth
+        autoComplete="off"
+        variant="outlined"
+        type="tel"
+        value={number}
+        onChange={numberHandler}
+        inputProps={{
+          pattern: '[0-9] {10}',
+          title: 'Номер телефона должен состоять из 9 цифр',
+        }}
+        required
+        size="small"
+        margin="normal"
+      />
+      <Button
+        type="submit"
+        variant="contained"
+        size="small"
+        sx={{ width: 130 }}
+      >
         Add contact
-      </button>
+      </Button>
     </form>
   );
 }

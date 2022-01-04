@@ -24,12 +24,10 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    // <div>Hello world1</div>
     ///для  предотвращения  мигания страниц при перезагрузке страницы  -  пока загрузка  не рендерится,  когд получены данные польз  тогда рендер
 
     !refreshing && (
       <Routes>
-        {/* <Route index element={<HomePage />} /> */}
         <Route
           path="/"
           element={

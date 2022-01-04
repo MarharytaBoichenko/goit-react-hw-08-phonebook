@@ -1,29 +1,32 @@
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { deleteContacts } from "../../redux/operations";
-import s from "./ContactItem.module.css";
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { Button, Typography, ListItem } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteContacts } from '../../redux/operations';
 
 const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
-  const deleteContact = (id) => {
+  const deleteContact = id => {
     dispatch(deleteContacts(id));
   };
 
   return (
-    <div className={s.contactItem}>
-      <p className={s.contactName}> {`${name}:`}</p>{" "}
-      <p className={s.contactNumber}> {number}</p>
-      <button
-        type="button"
-        className={s.button}
+    <ListItem sx={{ display: 'flex', alignItems: 'center' }}>
+      <Typography>{`${name}:`}</Typography>
+      <Typography sx={{ ml: '15px' }}>{number}</Typography>
+      <Button
+        endIcon={<DeleteIcon />}
         onClick={() => {
           deleteContact(id);
         }}
+        variant="contained"
+        size="small"
+        sx={{ width: 90, ml: '15px' }}
       >
         Delete
-      </button>
-    </div>
+      </Button>
+    </ListItem>
   );
 };
 
@@ -33,3 +36,5 @@ ContactItem.propTypes = {
   number: PropTypes.string,
 };
 export { ContactItem };
+
+///

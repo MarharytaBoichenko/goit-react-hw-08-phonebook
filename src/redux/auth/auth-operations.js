@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+// import Alert from '@mui/material/Alert';
+// import AlertTitle from '@mui/material/AlertTitle';
+
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 ///чтобы не  передаваnmd каждом запросе заголовок с токеном создаем объект токена
@@ -14,37 +17,51 @@ const token = {
   },
 };
 
-const register = createAsyncThunk('user/register', async credentials => {
-  try {
-    const response = await axios.post('/users/signup', credentials);
-    console.log(response.data.token);
+const register = createAsyncThunk(
+  'user/register',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/users/signup', credentials);
+      console.log(response.data.token);
 
-    token.set(response.data.token);
-    return response.data;
-  } catch (err) {
-    console.log(err);
-    //   return rejectWithValue(err.response.data);
-    /////  как  обрабатывать ошибки ????
-  }
-});
+      token.set(response.data.token);
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      if (error.response.status === 400) {
+        alert('User creation error! Please try again!');
+      } else if (error.response.status === 500) {
+        alert('Server error! Please try again later!');
+      } else {
+        alert('Oops, something went wrong!');
+      }
+      return rejectWithValue(error);
+    }
+  },
+);
 
-const logIn = createAsyncThunk('user/logIn', async credentials => {
-  try {
-    const { data } = await axios.post('/users/login', credentials);
-    console.log(token);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    //обрабатывать ошибку
-  }
-});
+const logIn = createAsyncThunk(
+  'user/logIn',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/users/login', credentials);
+      console.log(token);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      alert('Invalid email or password! Please enter correct data!');
+      return rejectWithValue(error);
+    }
+  },
+);
 
 const logOut = createAsyncThunk('user/logOut', async () => {
   try {
     axios.post('/users/logout');
     token.unset();
   } catch (error) {
-    //обрабатывать ошибку
+    console.log(error);
+    alert('Something went wrong! Please try again!'); //обрабатывать ошибку
   }
 });
 
@@ -73,7 +90,8 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      //обрабатывать ошибку
+      token.unset();
+      alert('Your session has timed out. Please login again!');
     }
   },
 );
