@@ -80,15 +80,15 @@ const fetchCurrentUser = createAsyncThunk(
     if (persistedToken === null) {
       console.log('Токена нет, уходим из fetchCurrentUser');
       return thunkAPI.rejectWithValue();
-
-      //если оставить просто returт то он  возвращает undefined  и оно идет в payload и потом все падает
-
-      ///не совсем понятно (((
     }
+    //если оставить просто returт то он  возвращает undefined  и оно идет в payload и потом все падает
+    ///не совсем понятно (((
+
     //   если  он есть в локал стор, то  сетим токен в заголовок  и отправляем запрос за данными юзера
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/users/current');
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);

@@ -1,4 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 
 import {
   persistStore,
@@ -18,6 +19,15 @@ import { userReducer } from './auth/auth-reducers';
 //для  сохранения токена  в  local  storage  чтобы  данные текущего польз  можно
 //было взять при перезагрузке страницы
 
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  logger,
+];
+
 ///это то что будем  сохранять
 const authPersistConfig = {
   key: 'authtoken',
@@ -32,12 +42,7 @@ const store = configureStore({
     filter: filterReducer,
     user: persistReducer(authPersistConfig, userReducer),
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  middleware,
   devTools: process.env.NODE_ENV === 'development',
 });
 
