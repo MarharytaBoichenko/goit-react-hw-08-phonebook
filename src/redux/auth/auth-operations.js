@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import Alert from '@mui/material/Alert';
-// import AlertTitle from '@mui/material/AlertTitle';
+
+// const CLIENT_ID =
+//   '833112110572-4k4p2jgajs88vl35lvc5lr8svmkkb6m9.apps.googleusercontent.com';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -90,8 +91,9 @@ const fetchCurrentUser = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      token.unset();
-      alert('Your session has timed out. Please login again!');
+      console.log(error);
+      // token.unset();
+      // alert('Your session has timed out. Please login again!');
     }
   },
 );

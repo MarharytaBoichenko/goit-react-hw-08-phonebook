@@ -7,7 +7,7 @@ import { ContainerBox } from '../../components/Container/Container';
 // import { UserMenu } from '../../components/User Menu/userMenu';
 import { Header } from '../../components/Header/Header';
 
-export const Contacts = () => {
+const Contacts = () => {
   return (
     <>
       <Header />
@@ -21,3 +21,5 @@ export const Contacts = () => {
     </>
   );
 };
+
+export default Contacts;

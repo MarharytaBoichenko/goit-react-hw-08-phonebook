@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+
 import {
   persistStore,
   persistReducer,
@@ -14,14 +14,6 @@ import storage from 'redux-persist/lib/storage';
 import { contactReducer } from './contacts-reducer';
 import { filterReducer } from './filter-reducer';
 import { userReducer } from './auth/auth-reducers';
-// console.log(userReducer);
-
-const middleware = getDefaultMiddleware =>
-  getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }).concat(logger);
 
 //для  сохранения токена  в  local  storage  чтобы  данные текущего польз  можно
 //было взять при перезагрузке страницы
@@ -40,7 +32,12 @@ const store = configureStore({
     filter: filterReducer,
     user: persistReducer(authPersistConfig, userReducer),
   },
-  middleware,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
   devTools: process.env.NODE_ENV === 'development',
 });
 
@@ -48,4 +45,3 @@ const persistor = persistStore(store);
 
 // eslint-disable-next-line
 export default { store, persistor };
-// export default store;

@@ -5,7 +5,7 @@ import s from './Register.module.css';
 import operations from '../../redux/auth/auth-operations';
 import { Header } from '../../components/Header/Header';
 
-export const Register = () => {
+const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -101,3 +101,5 @@ export const Register = () => {
     </>
   );
 };
+
+export default Register;

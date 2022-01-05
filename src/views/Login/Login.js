@@ -11,13 +11,18 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import s from './Login.module.css';
 import operations from '../../redux/auth/auth-operations';
+// import { getIsLoggedIn } from '../../redux/auth/auth-selectors';
 import { Header } from '../../components/Header/Header';
+// import { LoginGoogle } from '../../components/GoolgeLogin/GoolgeLogin';
+// import { LogoutGoogle } from '../../components/LogoutGoogle/LogoutGoogle';
 
-export const Login = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [shownPassword, setShownPassword] = useState(false);
   const dispatch = useDispatch();
+
+  // const isLoggedIn = useSelector(getIsLoggedIn);
 
   const onEmailChange = e => {
     setEmail(e.target.value);
@@ -116,7 +121,11 @@ export const Login = () => {
             LogIn
           </Button>
         </form>
+        {/* {!isLoggedIn ? (
+          <LoginGoogle /> ) : (<LogoutGoogle /> )} */}
       </Container>
     </>
   );
 };
+
+export default Login;

@@ -82,8 +82,8 @@ function ContactForm() {
         value={number}
         onChange={numberHandler}
         inputProps={{
-          pattern: '[0-9] {10}',
-          title: 'Номер телефона должен состоять из 9 цифр',
+          pattern: '[0-9]{10}',
+          title: 'Номер телефона должен состоять из 10  цифр без  пробелов',
         }}
         required
         size="small"

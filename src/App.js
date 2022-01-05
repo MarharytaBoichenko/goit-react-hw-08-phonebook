@@ -1,17 +1,26 @@
 import './App.module.css';
+import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-//сделать  lazy  загрузку
-import { Contacts } from './views/Contacts/Contacts';
-import { Login } from './views/Login/Login';
-import { Register } from './views/Register/Register';
-import { Home } from './views/Home/Home';
+import Loading from './components/Loader/Loading';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
 import operations from './redux/auth/auth-operations';
 import { getRefreshing } from './redux/auth/auth-selectors';
-// import Counter from "./Counter/counter";
+
+const Home = lazy(() =>
+  import('./views/Home/Home.js' /* webpackChunkName: "Home" */),
+);
+const Register = lazy(() =>
+  import('./views/Register/Register.js' /* webpackChunkName: "Register" */),
+);
+const Login = lazy(() =>
+  import('./views/Login/Login.js' /* webpackChunkName: "Login" */),
+);
+const Contacts = lazy(() =>
+  import('./views/Contacts/Contacts.js' /* webpackChunkName: "Contacts" */),
+);
 
 export default function App() {
   const dispatch = useDispatch();
@@ -25,44 +34,47 @@ export default function App() {
 
   return (
     ///для  предотвращения  мигания страниц при перезагрузке страницы  -  пока загрузка  не рендерится,  когд получены данные польз  тогда рендер
+    <div>
+      {!refreshing && (
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Home />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute restricted>
+                  <Register />
+                </PublicRoute>
+              }
+            />
 
-    !refreshing && (
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PublicRoute>
-              <Home />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <PublicRoute restricted>
-              <Register />
-            </PublicRoute>
-          }
-        />
+            <Route
+              path="login"
+              element={
+                <PublicRoute restricted redirectTo="/contacts">
+                  <Login />
+                </PublicRoute>
+              }
+            />
 
-        <Route
-          path="login"
-          element={
-            <PublicRoute restricted redirectTo="/contacts">
-              <Login />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="contacts"
-          element={
-            <PrivateRoute redirectTo="/login">
-              <Contacts />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    )
+            <Route
+              path="contacts"
+              element={
+                <PrivateRoute redirectTo="/login">
+                  <Contacts />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Suspense>
+      )}
+    </div>
   );
 }
