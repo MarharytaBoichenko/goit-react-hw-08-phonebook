@@ -92,7 +92,7 @@ const fetchCurrentUser = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
-      // token.unset();
+      token.unset();
       // alert('Your session has timed out. Please login again!');
     }
   },

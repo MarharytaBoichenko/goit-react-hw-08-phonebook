@@ -35,7 +35,9 @@ export default function App() {
   return (
     ///для  предотвращения  мигания страниц при перезагрузке страницы  -  пока загрузка  не рендерится,  когд получены данные польз  тогда рендер
     <div>
-      {!refreshing && (
+      {refreshing ? (
+        <Loading />
+      ) : (
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route
