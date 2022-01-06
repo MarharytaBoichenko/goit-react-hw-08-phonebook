@@ -9,12 +9,21 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 ///чтобы не  передаваnmd каждом запросе заголовок с токеном создаем объект токена
 //сетит  токен на хедеры
 
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common['Authorization'] = '';
+//   },
+// };
+
 const token = {
   set(token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common['Authorization'] = '';
+    axios.defaults.headers.common.Authorization = '';
   },
 };
 
@@ -58,7 +67,7 @@ const logIn = createAsyncThunk(
 
 const logOut = createAsyncThunk('user/logOut', async () => {
   try {
-    axios.post('/users/logout');
+    await axios.post('/users/logout');
     token.unset();
   } catch (error) {
     console.log(error);
@@ -88,9 +97,13 @@ const fetchCurrentUser = createAsyncThunk(
     //   если  он есть в локал стор, то  сетим токен в заголовок  и отправляем запрос за данными юзера
     token.set(persistedToken);
     try {
-      const { data } = await axios.get('/users/current');
-      console.log(data);
-      return data;
+      console.log('go to refresh user');
+      console.log(state);
+      const response = await axios.get('/users/current');
+      console.log('ghfgf');
+      console.log(response);
+
+      return response.data;
     } catch (error) {
       console.log(error);
       token.unset();

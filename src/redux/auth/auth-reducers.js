@@ -33,12 +33,15 @@ export const userReducer = createReducer(initialState, {
 
     //delete token  and  clear  state
   },
-  [operations.fetchCurrentUser.pending]: (state, actions) => {
+  [operations.fetchCurrentUser.pending]: (state, action) => {
+    console.log(action);
+    console.log(action.payload);
     state.isRefreshing = true;
   },
-  [operations.fetchCurrentUser.fulfilled]: (state, actions) => {
-    console.log(actions.payload);
-    state.user = actions.payload;
+  [operations.fetchCurrentUser.fulfilled]: (state, action) => {
+    console.log(action);
+    console.log(action.payload);
+    state.user = action.payload;
     state.isLoggedIn = true;
     state.isRefreshing = false;
   },
