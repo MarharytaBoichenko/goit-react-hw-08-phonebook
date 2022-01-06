@@ -74,8 +74,8 @@ const fetchCurrentUser = createAsyncThunk(
     //получаем весь state
     const state = thunkAPI.getState();
     //из  него  токен, который сохранял персист  (если он есть)
-    const persistedToken = state.user.token;
-    // console.log(persistedToken);
+    const persistedToken = state.auth.token;
+    console.log(persistedToken);
     //если токена нет  сохраненного то пользователя  нет , даем ошибку
     if (persistedToken === null) {
       console.log('Токена нет, уходим из fetchCurrentUser');

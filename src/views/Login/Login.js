@@ -10,9 +10,9 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import s from './Login.module.css';
-import operations from '../../redux/auth/auth-operations';
+import operations from 'redux/auth/auth-operations';
 // import { getIsLoggedIn } from '../../redux/auth/auth-selectors';
-import { Header } from '../../components/Header/Header';
+import { Header } from 'components/Header/Header';
 // import { LoginGoogle } from '../../components/GoolgeLogin/GoolgeLogin';
 // import { LogoutGoogle } from '../../components/LogoutGoogle/LogoutGoogle';
 

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, Typography } from '@mui/material';
-import { addContacts, replaceContacts } from '../../redux/operations';
+import { addContacts, replaceContacts } from 'redux/contacts/operations';
 
 import s from './ContactForm.module.css';
 
@@ -82,8 +82,10 @@ function ContactForm() {
         value={number}
         onChange={numberHandler}
         inputProps={{
-          pattern: '[0-9]{10}',
-          title: 'Номер телефона должен состоять из 10  цифр без  пробелов',
+          pattern:
+            '+?d{1,4}?[-.s]?(?d{1,3}?)?[-.s]?d{1,4}[-.s]?d{1,4}[-.s]?d{1,9}',
+          title:
+            'Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +',
         }}
         required
         size="small"

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Button, Typography, ListItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteContacts } from '../../redux/operations';
+import { deleteContacts } from 'redux/contacts/operations';
 
 const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();

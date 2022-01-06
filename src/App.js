@@ -1,6 +1,6 @@
 import './App.module.css';
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Loading from './components/Loader/Loading';
@@ -74,6 +74,7 @@ export default function App() {
                 </PrivateRoute>
               }
             />
+            <Route path="*" element={<Navigate to={'/'} />} />
           </Routes>
         </Suspense>
       )}

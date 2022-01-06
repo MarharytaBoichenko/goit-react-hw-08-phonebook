@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { Navigation } from '../Navigation/Navigation';
 import { MainNav } from '../MainNav/MainNav';
 import { UserMenu } from '../UserMenu/userMenu';
-import { getIsLoggedIn } from '../../redux/auth/auth-selectors';
+import { getIsLoggedIn } from 'redux/auth/auth-selectors';
 import s from '../Navigation/Navigation.module.css';
 
 export const Header = () => {

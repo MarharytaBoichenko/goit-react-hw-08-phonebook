@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { List } from '@mui/material';
 import { ContactItem } from '../ContactItem/ContactItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { getVisibleContacts } from '../../redux/selectors';
-import { fetchContacts } from '../../redux/operations';
+import { getVisibleContacts } from 'redux/contacts/selectors';
+import { fetchContacts } from 'redux/contacts/operations';
 
 const ContactList = () => {
   const dispatch = useDispatch();

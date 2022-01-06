@@ -12,8 +12,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { contactReducer } from './contacts-reducer';
-import { filterReducer } from './filter-reducer';
+import { contactReducer } from './contacts/contacts-reducer';
+import { filterReducer } from './contacts/filter-reducer';
 import { userReducer } from './auth/auth-reducers';
 
 //для  сохранения токена  в  local  storage  чтобы  данные текущего польз  можно
@@ -40,7 +40,7 @@ const store = configureStore({
   reducer: {
     contacts: contactReducer,
     filter: filterReducer,
-    user: persistReducer(authPersistConfig, userReducer),
+    auth: persistReducer(authPersistConfig, userReducer),
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { TextField, Button, Container, Typography } from '@mui/material';
 import s from './Register.module.css';
-import operations from '../../redux/auth/auth-operations';
-import { Header } from '../../components/Header/Header';
+import operations from 'redux/auth/auth-operations';
+import { Header } from 'components/Header/Header';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -80,7 +80,7 @@ const Register = () => {
             fullWidth
             variant="outlined"
             required
-            type="text"
+            type="password"
             value={password}
             placeholder="Enter  your password"
             onChange={onPasswordChange}

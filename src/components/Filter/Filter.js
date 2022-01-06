@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { TextField, Typography, Box } from '@mui/material';
-import { changeFilter } from '../../redux/actions';
+import { changeFilter } from 'redux/contacts/actions';
 const Filter = () => {
   const dispatch = useDispatch();
 

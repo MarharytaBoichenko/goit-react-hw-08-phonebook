@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Typography, Box } from '@mui/material';
-import { getName } from '../../redux/auth/auth-selectors';
-import operations from '../../redux/auth/auth-operations';
+import { getName } from 'redux/auth/auth-selectors';
+import operations from 'redux/auth/auth-operations';
 
 export const UserMenu = () => {
   const name = useSelector(getName);
