@@ -73,6 +73,7 @@ const fetchCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     //получаем весь state
     const state = thunkAPI.getState();
+    console.log(state);
     //из  него  токен, который сохранял персист  (если он есть)
     const persistedToken = state.auth.token;
     console.log(persistedToken);

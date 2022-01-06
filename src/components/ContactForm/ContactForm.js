@@ -80,12 +80,11 @@ function ContactForm() {
         variant="outlined"
         type="tel"
         value={number}
+        placeholder="only numbers"
         onChange={numberHandler}
         inputProps={{
-          pattern:
-            '+?d{1,4}?[-.s]?(?d{1,3}?)?[-.s]?d{1,4}[-.s]?d{1,4}[-.s]?d{1,9}',
-          title:
-            'Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +',
+          pattern: '[0-9]{9,13}',
+          title: 'Номер телефона должен состоять цифр из 9-13 цифр ',
         }}
         required
         size="small"
